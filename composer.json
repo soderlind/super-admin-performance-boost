@@ -1,0 +1,8 @@
+{
+    "name": "soderlind/super-admin-performance-boost",
+    "description": "Super Admin Performance Boost.",
+    "type": "wordpress-plugin",
+    "homepage": "https://github.com/soderlind/super-admin-performance-boost",
+    "license": "GPL-2.0-or-later",
+    "require": {}
+}
