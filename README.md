@@ -1,8 +1,8 @@
-# WordPress Super Admin Performance Boost
+# Super Admin Performance Boost
 
 > Also, take a look at [Super Admin All Sites Menu](https://github.com/soderlind/super-admin-all-sites-menu#super-admin-all-sites-menu)
 
-Tries to avoid using [`switch_to_blog()` and `restore_current_blog()`](assets/switch-to-blog.png) when possible.
+On a WordPress Multisite, tries to avoid using [`switch_to_blog()` and `restore_current_blog()`](assets/switch-to-blog.png) when possible.
 
 Super Admin owns all site, so:
 
