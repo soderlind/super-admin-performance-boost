@@ -1,6 +1,8 @@
 # Super Admin Performance Boost
 
-Try to aviod using switch_to_blog() and restore_current_blog() when possible.
+> Also, take a look at [Super Admin All Sites Menu](https://github.com/soderlind/super-admin-all-sites-menu#super-admin-all-sites-menu)
+
+Try to aviod using [`switch_to_blog()` and `restore_current_blog()`](assets/switch-to-blog.png) when possible.
 
 Super Admin owns all site, so:
 

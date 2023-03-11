@@ -34,4 +34,4 @@ if ( ! class_exists( 'Super_Admin_Sites_List_Table' ) ) {
 if ( ! class_exists( 'Super_Admin_Performance_Boost' ) ) {
 	require_once __DIR__ . '/class-super-admin-performance-boost.php';
 }
-new Super_Admin_Performance_Boost();
+// new Super_Admin_Performance_Boost();
