@@ -1,4 +1,4 @@
-# Super Admin Performance Boost
+# WordPress Super Admin Performance Boost
 
 > Also, take a look at [Super Admin All Sites Menu](https://github.com/soderlind/super-admin-all-sites-menu#super-admin-all-sites-menu)
 
