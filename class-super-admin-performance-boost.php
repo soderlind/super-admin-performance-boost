@@ -1,9 +1,22 @@
 <?php
+/**
+ * Super Admin Performance Boost.
+ *
+ * @package   Super_Admin_Performance_Boost
+ * @author    Per Soderlind
+ * @since     1.0.0
+ */
 
 declare( strict_types = 1 );
 
+/**
+ * Super Admin Performance Boost.
+ */
 class Super_Admin_Performance_Boost {
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		add_filter( 'pre_get_blogs_of_user', [ $this, 'super_admin_get_blogs_of_user' ], 9, 3 );
 		add_filter( 'wp_list_table_class_name', [ $this, 'super_admin_wp_list_table_class_name' ], 10, 2 );
@@ -32,7 +45,7 @@ class Super_Admin_Performance_Boost {
 	}
 
 	/**
-	 * For the Super Admin, use a custom list table classes
+	 * For the Super Admin, use a custom list table class.
 	 *
 	 * @param string $class_name The list table class to use.
 	 * @param array  $args       An array containing _get_list_table() arguments.
@@ -49,16 +62,16 @@ class Super_Admin_Performance_Boost {
 		return $class_name;
 	}
 
-		/**
-		 * For the superadmin, speed up the loading of the get_blogs_of_user() function.
-		 *
-		 * Stores the blogname, siteurl, home, and post_count in the wp_blogmeta table.
-		 *
-		 * @param null|object[] $sites   An array of site objects of which the user is a member.
-		 * @param int           $user_id User ID.
-		 * @param bool          $all     Whether the returned array should contain all sites, including those marked 'deleted', 'archived', or 'spam'. Default false.
-		 * @return null|object[] An array of site objects of which the user is a member.
-		 */
+	/**
+	 * For the superadmin, speed up the loading of the get_blogs_of_user() function.
+	 *
+	 * Stores the blogname, siteurl, home, and post_count in the wp_blogmeta table.
+	 *
+	 * @param null|object[] $sites   An array of site objects of which the user is a member.
+	 * @param int           $user_id User ID.
+	 * @param bool          $all     Whether the returned array should contain all sites, including those marked 'deleted', 'archived', or 'spam'. Default false.
+	 * @return null|object[] An array of site objects of which the user is a member.
+	 */
 	public function super_admin_get_blogs_of_user( ?array $sites, int $user_id, bool $all ) : ?array {
 
 		if ( ! \is_super_admin() ) {
@@ -126,7 +139,12 @@ class Super_Admin_Performance_Boost {
 	}
 
 
-
+	/**
+	 * Get the admin URL for a given blog ID.
+	 *
+	 * @param int $blog_id The blog ID.
+	 * @return string The admin URL.
+	 */
 	public static function get_admin_url( int $blog_id ) : string {
 		$admin_url = get_site_meta( $blog_id, 'siteurl', true );
 		if ( false === $admin_url ) {
@@ -136,6 +154,12 @@ class Super_Admin_Performance_Boost {
 		return $admin_url;
 	}
 
+	/**
+	 * Get the home URL for a given blog ID.
+	 *
+	 * @param int $blog_id The blog ID.
+	 * @return string The home URL.
+	 */
 	public static function get_home_url( int $blog_id ) : string {
 		$home_url = get_site_meta( $blog_id, 'home', true );
 		if ( false === $home_url ) {

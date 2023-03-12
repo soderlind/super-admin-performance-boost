@@ -1,4 +1,9 @@
 <?php
+/**
+ * Super Admin Performance Boost. Modify the list of sites in the network admin.
+ *
+ * @package   Super_Admin_Performance_Boost
+ */
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
@@ -7,14 +12,14 @@ if ( ! class_exists( 'WP_MS_Sites_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-ms-sites-list-table.php';
 }
 
-	/**
-	 * For the Super Admin, display a list of all sites on the network using
-	 * bespoke get_admin_url() and get_home_url().
-	 *
-	 * @since 1.0.0
-	 *
-	 * @see WP_MS_Sites_List_Table
-	 */
+/**
+ * For the Super Admin, display a list of all sites on the network using
+ * bespoke get_admin_url() and get_home_url().
+ *
+ * @since 1.0.0
+ *
+ * @see WP_MS_Sites_List_Table
+ */
 class Super_Admin_Sites_List_Table extends WP_MS_Sites_List_Table {
 
 	/**
@@ -27,11 +32,14 @@ class Super_Admin_Sites_List_Table extends WP_MS_Sites_List_Table {
 	}
 
 	/**
-	 * Prepares the list of items for displaying.
+	 * Generates and displays row action links. (Copied from WP_MS_Sites_List_Table).
+	 * Modified to use Super_Admin_Performance_Boost::get_admin_url() and Super_Admin_Performance_Boost::get_home_url().
 	 *
-	 * @since 1.0.0
-	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @param array  $item        Site being acted upon.
+	 * @param string $column_name Current column name.
+	 * @param string $primary     Primary column name.
+	 * @return string Row actions output for sites in Multisite, or an empty string
+	 *                if the current column is not the primary column.
 	 */
 	protected function handle_row_actions( $item, $column_name, $primary ) {
 		if ( $primary !== $column_name ) {
@@ -58,20 +66,20 @@ class Super_Admin_Sites_List_Table extends WP_MS_Sites_List_Table {
 
 		$actions['edit']    = '<a href="' . esc_url( network_admin_url( 'site-info.php?id=' . $blog['blog_id'] ) ) . '">' . __( 'Edit' ) . '</a>';
 		$actions['backend'] = "<a href='" . esc_url( Super_Admin_Performance_Boost::get_admin_url( $blog['blog_id'] ) ) . "' class='edit'>" . __( 'Dashboard' ) . '</a>';
-		if ( get_network()->site_id != $blog['blog_id'] ) {
-			if ( '1' == $blog['deleted'] ) {
+		if ( get_network()->site_id !== $blog['blog_id'] ) {
+			if ( '1' === $blog['deleted'] ) {
 				$actions['activate'] = '<a href="' . esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=confirm&amp;action2=activateblog&amp;id=' . $blog['blog_id'] ), 'activateblog_' . $blog['blog_id'] ) ) . '">' . __( 'Activate' ) . '</a>';
 			} else {
 				$actions['deactivate'] = '<a href="' . esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=confirm&amp;action2=deactivateblog&amp;id=' . $blog['blog_id'] ), 'deactivateblog_' . $blog['blog_id'] ) ) . '">' . __( 'Deactivate' ) . '</a>';
 			}
 
-			if ( '1' == $blog['archived'] ) {
+			if ( '1' === $blog['archived'] ) {
 				$actions['unarchive'] = '<a href="' . esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=confirm&amp;action2=unarchiveblog&amp;id=' . $blog['blog_id'] ), 'unarchiveblog_' . $blog['blog_id'] ) ) . '">' . __( 'Unarchive' ) . '</a>';
 			} else {
 				$actions['archive'] = '<a href="' . esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=confirm&amp;action2=archiveblog&amp;id=' . $blog['blog_id'] ), 'archiveblog_' . $blog['blog_id'] ) ) . '">' . _x( 'Archive', 'verb; site' ) . '</a>';
 			}
 
-			if ( '1' == $blog['spam'] ) {
+			if ( '1' === $blog['spam'] ) {
 				$actions['unspam'] = '<a href="' . esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=confirm&amp;action2=unspamblog&amp;id=' . $blog['blog_id'] ), 'unspamblog_' . $blog['blog_id'] ) ) . '">' . _x( 'Not Spam', 'site' ) . '</a>';
 			} else {
 				$actions['spam'] = '<a href="' . esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=confirm&amp;action2=spamblog&amp;id=' . $blog['blog_id'] ), 'spamblog_' . $blog['blog_id'] ) ) . '">' . _x( 'Spam', 'site' ) . '</a>';

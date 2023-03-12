@@ -12,7 +12,7 @@
  * Plugin URI: https://github.com/soderlind/super-admin-performance
  * GitHub Plugin URI: https://github.com/soderlind/super-admin-performance
  * Description: Try to aviod using switch_to_blog() and restore_current_blog() when possible.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Per Soderlind
  * Author URI:  https://soderlind.no
  * Network:     true
@@ -34,4 +34,4 @@ if ( ! class_exists( 'Super_Admin_Sites_List_Table' ) ) {
 if ( ! class_exists( 'Super_Admin_Performance_Boost' ) ) {
 	require_once __DIR__ . '/class-super-admin-performance-boost.php';
 }
-// new Super_Admin_Performance_Boost();
+new Super_Admin_Performance_Boost();
