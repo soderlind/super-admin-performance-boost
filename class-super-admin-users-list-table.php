@@ -16,7 +16,7 @@ if ( ! class_exists( 'WP_MS_Users_List_Table' ) ) {
  * For the Super Admin, If Super Admin, link to the sites.php page. Otherwise display a list to sites on the network using
  * bespoke  Super_Admin_Performance_Boost::get_home_url().
  *
- * @since 1.0.0
+ * @since 1.1.0
  *
  * @see WP_MS_Users_List_Table
  */
@@ -48,7 +48,7 @@ class Super_Admin_Users_List_Table extends WP_MS_Users_List_Table {
 	 * Handles the sites column output. (Copied from WP_MS_Users_List_Table).
 	 * Modified to use Super_Admin_Performance_Boost::get_home_url().
 	 *
-	 * @since 4.3.0
+	 * @since 1.1.0
 	 *
 	 * @param WP_User $user The current WP_User object.
 	 */
@@ -68,7 +68,7 @@ class Super_Admin_Users_List_Table extends WP_MS_Users_List_Table {
 			/**
 			 * Filters the span class for a site listing on the mulisite user list table.
 			 *
-			 * @since 5.2.0
+			 * @since WP 5.2.0
 			 *
 			 * @param string[] $site_classes Array of class names used within the span tag. Default "site-#" with the site's network ID .
 			 * @param int      $site_id      Site ID .
@@ -107,7 +107,7 @@ class Super_Admin_Users_List_Table extends WP_MS_Users_List_Table {
 			 * Filters the action links displayed next the sites a user belongs to
 			 * in the Network Admin Users list table.
 			 *
-			 * @since 3.1.0
+			 * @since WP 3.1.0
 			 *
 			 * @param string[] $actions     An array of action links to be displayed. Default 'Edit', 'View'.
 			 * @param int      $userblog_id The site ID.
