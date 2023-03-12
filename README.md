@@ -12,6 +12,16 @@ On a WordPress Multisite, tries to avoid using [`switch_to_blog()` and `restore_
    - For the Super Admin, hide their sites in the `Sites` column. No point in [listing the sites](assets/all-sites.png), the super admins own 'em all.
    - For rest of the users, use bespoke `Super_Admin_Performance_Boost::get_home_url()` funtions.
 
+## Side note
+
+I wish I did't have to write this plugin, but it feels like WordPress Multisite is not ready for the Super Admin role.
+
+I have a multisite with 100+ sites, and the following issues are a pain:
+
+- The [My Sites menu doesn't work for more thqn 23 sites](https://core.trac.wordpress.org/ticket/15317), hence my [Super Admin All Sites Menu](https://github.com/soderlind/super-admin-all-sites-menu#super-admin-all-sites-menu) plugin.
+- `switch_to_blog()`, there's no need for switching to a blog to check if the super admin has access, they do.
+- There's no point in listing all sites in the `Sites` column for the Super Admin, they own them all.
+
 ## Installation
 
 You know the drill.
