@@ -14,12 +14,12 @@ On a WordPress Multisite, tries to avoid using [`switch_to_blog()` and `restore_
 
 ## Side note
 
-I wish I did't have to write this plugin, but it feels like WordPress Multisite is not ready for the Super Admin role.
+I wish I did't have to write this plugin and the [Super Admin All Sites Menu](https://github.com/soderlind/super-admin-all-sites-menu#super-admin-all-sites-menu) plugin, but it feels like WordPress Multisite is not ready for the Super Admin role.
 
 I have a multisite with 100+ sites, and the following issues are a pain:
 
 - The [My Sites menu doesn't work for more thqn 23 sites](https://core.trac.wordpress.org/ticket/15317), hence my [Super Admin All Sites Menu](https://github.com/soderlind/super-admin-all-sites-menu#super-admin-all-sites-menu) plugin.
-- `switch_to_blog()`, there's no need for switching to a blog to check if the super admin has access, they do.
+- `switch_to_blog()` is used on every site for each page load, only to get the blog details, which is a waste of resources.
 - There's no point in listing all sites in the `Sites` column for the Super Admin, they own them all.
 
 ## Installation
