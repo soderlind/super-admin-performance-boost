@@ -9,7 +9,7 @@ On a WordPress Multisite, tries to avoid using [`switch_to_blog()` and `restore_
 1. Short-circuit the `get_blogs_of_user()` function. We don't have to check if a site is own by the user, we want all sites.
 2. Extend `WP_MS_Sites_List_Table` and use bespoke `Super_Admin_Performance_Boost::get_admin_url()` and `Super_Admin_Performance_Boost::get_home_url()` funtions.
 3. Extend `WP_MS_Users_List_Table`
-   - For the Super Admin, hide their sites in the `Sites` column. No point in [listing the sites](assets/all-sites.png), the super admins own 'em all.
+   - For the Super Admin, hide their sites in the `Sites` column.
    - For rest of the users, use bespoke `Super_Admin_Performance_Boost::get_home_url()` funtions.
 
 ## Side note
@@ -20,7 +20,7 @@ I have a multisite with 100+ sites, and the following issues are a pain:
 
 - The [My Sites menu doesn't work for more thqn 23 sites](https://core.trac.wordpress.org/ticket/15317), hence my [Super Admin All Sites Menu](https://github.com/soderlind/super-admin-all-sites-menu#super-admin-all-sites-menu) plugin.
 - `switch_to_blog()` is used on every site for each page load, only to get the blog details, which is a waste of resources.
-- There's no point in listing all sites in the `Sites` column for the Super Admin, they own them all.
+- There's no point in [listing all sites](assets/all-sites.png) in the `Sites` column for the Super Admin, they own them all.
 
 ## Installation
 
