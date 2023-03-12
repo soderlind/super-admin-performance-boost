@@ -20,29 +20,8 @@ class Super_Admin_Performance_Boost {
 	public function __construct() {
 		add_filter( 'pre_get_blogs_of_user', [ $this, 'super_admin_get_blogs_of_user' ], 9, 3 );
 		add_filter( 'wp_list_table_class_name', [ $this, 'super_admin_wp_list_table_class_name' ], 10, 2 );
-		add_filter( 'wpmu_users_columns', [ $this, 'filter_wpmu_users_columns' ] );
 	}
 
-	/**
-	 * Super Admin owns all site, no point in listing them, i,e,: Remove the 'blogs' column from the users list table.
-	 *
-	 * @param string[] $users_columns An array of user columns. Default 'cb', 'username', 'name', 'email', 'registered', 'blogs'.
-	 * @return string[] An array of user columns. Default 'cb', 'username', 'name', 'email', 'registered', 'blogs'.
-	 */
-	public function filter_wpmu_users_columns( array $users_columns ) : array {
-		if ( ! \is_super_admin() ) {
-			return $users_columns;
-		}
-		$users_columns = [
-			'cb'         => '<input type="checkbox" />',
-			'username'   => __( 'Username' ),
-			'name'       => __( 'Name' ),
-			'email'      => __( 'Email' ),
-			'registered' => _x( 'Registered', 'user' ),
-		// 'blogs'      => __( 'Sites' ),
-		];
-		return $users_columns;
-	}
 
 	/**
 	 * For the Super Admin, use a custom list table class.
@@ -57,6 +36,9 @@ class Super_Admin_Performance_Boost {
 		}
 		if ( 'WP_MS_Sites_List_Table' === $class_name ) {
 			$class_name = 'Super_Admin_Sites_List_Table';
+		}
+		if ( 'WP_MS_Users_List_Table' === $class_name ) {
+			$class_name = 'Super_Admin_Users_List_Table';
 		}
 
 		return $class_name;
@@ -74,7 +56,7 @@ class Super_Admin_Performance_Boost {
 	 */
 	public function super_admin_get_blogs_of_user( ?array $sites, int $user_id, bool $all ) : ?array {
 
-		if ( ! \is_super_admin() ) {
+		if ( ! \is_super_admin( $user_id ) ) {
 			return $sites;
 		}
 		$_sites = \get_sites(

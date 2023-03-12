@@ -14,7 +14,7 @@ if ( ! class_exists( 'WP_MS_Sites_List_Table' ) ) {
 
 /**
  * For the Super Admin, display a list of all sites on the network using
- * bespoke get_admin_url() and get_home_url().
+ * bespoke Super_Admin_Performance_Boost::get_admin_url() and Super_Admin_Performance_Boost::get_home_url().
  *
  * @since 1.0.0
  *

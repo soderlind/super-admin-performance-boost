@@ -4,11 +4,13 @@
 
 On a WordPress Multisite, tries to avoid using [`switch_to_blog()` and `restore_current_blog()`](assets/switch-to-blog.png) when possible.
 
-Super Admin owns all sites, so:
+## Description
 
 1. Short-circuit the `get_blogs_of_user()` function. We don't have to check if a site is own by the user, we want all sites.
 2. Extend `WP_MS_Sites_List_Table` and use bespoke `Super_Admin_Performance_Boost::get_admin_url()` and `Super_Admin_Performance_Boost::get_home_url()` funtions.
-3. Hide the `Sites` column in `WP_MS_Users_List_Table`, no point in [listing the sites](assets/all-sites.png) the super admins owns (they own 'em all)
+3. Extend `WP_MS_Users_List_Table`
+   - For the Super Admin, hide their sites in the `Sites` column. No point in [listing the sites](assets/all-sites.png), the super admins own 'em all.
+   - For rest of the users, use bespoke `Super_Admin_Performance_Boost::get_home_url()` funtions.
 
 ## Installation
 
