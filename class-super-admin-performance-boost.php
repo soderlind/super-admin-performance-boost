@@ -78,6 +78,14 @@ class Super_Admin_Performance_Boost {
 		$sites = [];
 		foreach ( $_sites as $site ) {
 
+			/**
+			 * Cast to array to avoid triggering the __get() method in the WP_Site class. This is a performance boost.
+			 *
+			 * The __get() method is triggered when accessing a property that does not exist in the class,
+			 * and since it uses `switch default`, it will trigger a get_blog_details() for any property that does not exist.
+			 *
+			 * Below we try to use get_blog_deatis only once for each property per site.
+			 */
 			$s          = (array) $site;
 			$blogname   = get_site_meta( $s['blog_id'], 'blogname', true );
 			$siteurl    = get_site_meta( $s['blog_id'], 'siteurl', true );
