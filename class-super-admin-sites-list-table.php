@@ -27,7 +27,7 @@ class Super_Admin_Sites_List_Table extends WP_MS_Sites_List_Table {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function __construct() { // phpcs:ignore
 		parent::__construct();
 	}
 

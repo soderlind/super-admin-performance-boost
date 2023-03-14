@@ -28,18 +28,18 @@ class Super_Admin_Users_List_Table extends WP_MS_Users_List_Table {
 	 *
 	 * @since 1.1.0
 	 *
-	 * @param WP_User $user
-	 * @param string  $classes
-	 * @param string  $data
-	 * @param string  $primary
+	 * @param WP_User $user      The current WP_User object.
+	 * @param string  $classes The list of CSS classes for the column.
+	 * @param string  $data  The data-attributes for the column.
+	 * @param string  $primary   The primary column name.
 	 */
-	protected function _column_blogs( $user, $classes, $data, $primary ) {
-		echo '<td class="', $classes, ' has-row-actions" ', $data, '>';
+	protected function _column_blogs( $user, $classes, $data, $primary ) { // phpcs:ignore
+		echo '<td class="', esc_attr( $classes ), ' has-row-actions" ', esc_attr( $data ), '>';
 		if ( is_super_admin( $user->ID ) ) {
-			echo '<a href="' . esc_url( network_admin_url( 'sites.php' ) ) . '">' . __( 'Sites' ) . '</a>';
+			echo '<a href="' . esc_url( network_admin_url( 'sites.php' ) ) . '">' . esc_html__( 'Sites' ) . '</a>';
 		} else {
-			echo $this->column_blogs( $user );
-			echo $this->handle_row_actions( $user, 'blogs', $primary );
+			echo esc_html( $this->column_blogs( $user ) );
+			echo esc_html( $this->handle_row_actions( $user, 'blogs', $primary ) );
 		}
 		echo '</td>';
 	}
@@ -68,13 +68,13 @@ class Super_Admin_Users_List_Table extends WP_MS_Users_List_Table {
 			/**
 			 * Filters the span class for a site listing on the mulisite user list table.
 			 *
-			 * @since WP 5.2.0
-			 *
-			 * @param string[] $site_classes Array of class names used within the span tag. Default "site-#" with the site's network ID .
-			 * @param int      $site_id      Site ID .
-			 * @param int      $network_id   Network ID .
-			 * @param WP_User  $user         WP_User object .
-			 */
+		 * @since WP 5.2.0
+		 *
+		 * @param string[] $site_classes Array of class names used within the span tag. Default "site-#" with the site's network ID .
+		 * @param int      $site_id      Site ID .
+		 * @param int      $network_id   Network ID .
+		 * @param WP_User  $user         WP_User object .
+		 */
 			$site_classes = apply_filters( 'ms_user_list_site_class', $site_classes, $site->userblog_id, $site->site_id, $user );
 			if ( is_array( $site_classes ) && ! empty( $site_classes ) ) {
 				$site_classes = array_map( 'sanitize_html_class', array_unique( $site_classes ) );
@@ -82,7 +82,7 @@ class Super_Admin_Users_List_Table extends WP_MS_Users_List_Table {
 			} else {
 				echo '<span>';
 			}
-			echo '<a href="' . esc_url( network_admin_url( 'site-info.php?id=' . $site->userblog_id ) ) . '">' . str_replace( '.' . get_network()->domain, '', $site->domain . $path ) . '</a>';
+			echo '<a href="' . esc_url( network_admin_url( 'site-info.php?id=' . $site->userblog_id ) ) . '">' . esc_html( str_replace( '.' . get_network()->domain, '', $site->domain . $path ) ) . '</a>';
 			echo ' <small class="row-actions">';
 			$actions         = [];
 			$actions['edit'] = '<a href="' . esc_url( network_admin_url( 'site-info.php?id=' . $site->userblog_id ) ) . '">' . __( 'Edit' ) . '</a>';
@@ -123,11 +123,13 @@ class Super_Admin_Users_List_Table extends WP_MS_Users_List_Table {
 
 				$separator = ( $i < $action_count ) ? ' | ' : '';
 
-				echo "<span class='$action'>{$link}{$separator}</span>";
+				echo '<span class=',  esc_attr( $action ) , '>',   wp_kses_post( $link ) , esc_html( $separator ),  '</span>';
+
 			}
 
 			echo '</small></span><br />';
 		}
 	}
+
 
 }
