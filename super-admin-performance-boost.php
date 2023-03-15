@@ -12,7 +12,7 @@
  * Plugin URI: https://github.com/soderlind/super-admin-performance
  * GitHub Plugin URI: https://github.com/soderlind/super-admin-performance
  * Description: Try to aviod using switch_to_blog() and restore_current_blog() when possible.
- * Version:     1.1.1
+ * Version:     1.1.2
  * Author:      Per Soderlind
  * Author URI:  https://soderlind.no
  * Network:     true

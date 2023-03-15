@@ -136,11 +136,14 @@ class Super_Admin_Performance_Boost {
 	 * @return string The admin URL.
 	 */
 	public static function get_admin_url( int $blog_id ) : string {
-		$admin_url = get_site_meta( $blog_id, 'siteurl', true );
-		if ( false === $admin_url ) {
-			$admin_url = get_blog_details( $blog_id )->siteurl;
-			add_site_meta( $blog_id, 'siteurl', $admin_url );
+		$siteurl = get_site_meta( $blog_id, 'siteurl', true );
+		if ( false === $siteurl ) {
+			$siteurl = get_blog_details( $blog_id )->siteurl;
+			add_site_meta( $blog_id, 'siteurl', $siteurl );
 		}
+
+		$admin_url = $siteurl . '/wp-admin/';
+
 		return $admin_url;
 	}
 
