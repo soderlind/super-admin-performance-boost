@@ -12,7 +12,7 @@
  * Plugin URI: https://github.com/soderlind/super-admin-performance
  * GitHub Plugin URI: https://github.com/soderlind/super-admin-performance
  * Description: Try to aviod using switch_to_blog() and restore_current_blog() when possible.
- * Version:     1.1.2
+ * Version:     1.1.3
  * Author:      Per Soderlind
  * Author URI:  https://soderlind.no
  * Network:     true
@@ -25,6 +25,10 @@ declare( strict_types = 1 );
 
 if ( ! defined( 'ABSPATH' ) ) {
 	wp_die();
+}
+
+if ( ! is_multisite() ) {
+	return;
 }
 
 if ( ! class_exists( 'Super_Admin_Sites_List_Table' ) ) {
