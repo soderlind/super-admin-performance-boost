@@ -92,9 +92,17 @@ class Super_Admin_Performance_Boost {
 			$home       = get_site_meta( $s['blog_id'], 'home', true );
 			$post_count = get_site_meta( $s['blog_id'], 'post_count', true );
 
+			/**
+			 * If get_site_meta() returns false, the blog ID is invalid (non-numeric, zero, or negative value).
+			 */
 			if ( false === $blogname || false === $siteurl || false === $home || false === $post_count ) {
 				continue;
 			}
+
+			/**
+			 * If the blog ID is valid, but the meta value is empty, the meta value has not been set.
+			 * In that case, we set the meta value.
+			 */
 
 			if ( '' === $blogname ) {
 				$blogname = get_blog_details( $s['blog_id'] )->blogname;
@@ -113,6 +121,9 @@ class Super_Admin_Performance_Boost {
 				add_site_meta( $s['blog_id'], 'post_count', $post_count );
 			}
 
+			/**
+			 * Merge the site object with the meta values. Mimics the behavior of get_blogs_of_user().
+			 */
 			$sites[ $s['blog_id'] ] = (object) array_merge(
 				$s,
 				[
